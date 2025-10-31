@@ -189,16 +189,14 @@ module Kolor
     #
     # @return [void]
     def colorize_text
-      text = if @args.empty?
+      text = if @args.empty? || @args.all? { |arg| arg.start_with?('--') }
                if $stdin.tty?
-                 puts "Error: No text provided"
-                 puts @option_parser
-                 exit 1
+                 exit_with_help
                else
                  $stdin.read.chomp
                end
              else
-               @args.join(' ')
+               @args.reject { |arg| arg.start_with?('--') }.join(' ')
              end
 
       Kolor.disable! if !$stdout.tty? && Kolor.enabled? && !ENV['KOLOR_FORCE']
@@ -305,6 +303,11 @@ module Kolor
         puts "Rainbow:"
         puts "The quick brown fox jumps over the lazy dog".rainbow
       end
+    end
+
+    def exit_with_help
+      puts @option_parser
+      exit 1
     end
   end
 end

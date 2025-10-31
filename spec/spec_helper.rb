@@ -2,6 +2,7 @@
 
 require 'simplecov'
 require 'coveralls'
+require 'kolor/extra'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   [SimpleCov::Formatter::HTMLFormatter, Coveralls::SimpleCov::Formatter]

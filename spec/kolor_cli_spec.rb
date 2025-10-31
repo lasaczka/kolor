@@ -165,18 +165,16 @@ RSpec.describe Kolor::CLI do
     context 'with no arguments' do
       let(:args) { [] }
 
-      it 'shows error and exits' do
+      it 'exits' do
         expect { cli.run }.to raise_error(SystemExit)
-                                .and output(/Error: No text provided/).to_stdout
       end
     end
 
     context 'with no text after options' do
       let(:args) { ['--red'] }
 
-      it 'shows error and exits' do
+      it 'exits' do
         expect { cli.run }.to raise_error(SystemExit)
-                                .and output(/Error: No text provided/).to_stdout
       end
     end
   end
