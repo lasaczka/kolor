@@ -10,3 +10,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.50'
   gem 'simplecov', require: false
 end
+
+group :test do
+  gem 'coveralls', require: false
+end

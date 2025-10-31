@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+require 'coveralls'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [SimpleCov::Formatter::HTMLFormatter, Coveralls::SimpleCov::Formatter]
+)
+
 SimpleCov.start do
   add_filter '/spec/'
+  add_filter '/bin/'
 end
 
 require 'kolor'
@@ -43,11 +50,9 @@ RSpec.configure do |config|
   end
 
   config.before(:each) { cleanup_config_themes! }
-  config.after(:each)  { cleanup_config_themes! }
+  config.after(:each) { cleanup_config_themes! }
 
   config.after(:suite) do
     $VERBOSE = @original_verbose
   end
 end
-
-
